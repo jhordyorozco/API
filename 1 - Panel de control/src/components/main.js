@@ -18,9 +18,14 @@ class Main extends HTMLElement {
           box-sizing: border-box;
         }
 
+        :host {
+          display: block;
+          width: 100%;
+        }
+
     .main {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
+      grid-template-columns: minmax(20rem, 24rem) 1fr;
       gap: 1rem;
       padding: 1rem;
     }
@@ -34,14 +39,6 @@ class Main extends HTMLElement {
       </div>
 
     `
-
-    this.shadow.querySelector('.title').addEventListener('click', () => {
-      this.alertMessage()
-    })
-  }
-
-  alertMessage () {
-    alert(this.message)
   }
 }
 

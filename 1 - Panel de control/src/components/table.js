@@ -19,15 +19,20 @@ this.shadow.innerHTML =
             margin: 0;
         }
 
+        :host {
+            display: block;
+            width: 100%;
+            border: 1px solid hsl(0, 0%, 85%);
+        }
+
         .table {
             display: grid;
-            width: 30rem;
+            width: 100%;
         }
 
         .table-header {
             display: grid;
             grid-template-columns: 2rem minmax(0, 1fr) auto;
-            padding: 0.5rem;
             padding-bottom: 0;
             border-bottom: 2px solid hsl(35, 90%, 55%);
         }
@@ -72,12 +77,11 @@ this.shadow.innerHTML =
         }
 
         .table-pagination button:hover {
-            font-size: 1.3rem;
+            background-color: hsla(0, 0%, 100%, 0.15);
         }
 
         .table-grid span:last-child {
             color: rgba(130, 130, 130, 1);
-            font-weight: 800;
         }
 
         .table-grid {

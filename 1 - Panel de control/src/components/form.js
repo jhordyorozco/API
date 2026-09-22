@@ -19,11 +19,17 @@ class Form extends HTMLElement {
             margin: 0;
         }
 
+        :host {
+            display: block;
+            width: 100%;
+            border: 1px solid hsl(0, 0%, 85%);
+        }
+
         .form-section {
             display: grid;
             gap: 1rem;
             grid-template-columns: minmax(0, 1fr) auto;
-            padding: 0.6rem;
+            padding: 0.6rem 0.6rem 0 0.6rem;
         }
 
         .form-title {
@@ -63,15 +69,14 @@ class Form extends HTMLElement {
 
         .form {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
             background-color: hsl(0, 0%, 100%);
-            padding: 2rem 4rem;
+            padding: 1.5rem;
         }
 
         .form-inputs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+            gap: 1.5rem;
         }
 
         .name-inputs, .email-inputs {
@@ -79,6 +84,7 @@ class Form extends HTMLElement {
             border: 1px solid hsl(0, 0%, 75%);
             height: 2rem;
             padding: 0.5rem;
+            width: 100%;
 
         }
 
