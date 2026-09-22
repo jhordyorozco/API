@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de control</title>
+  <style>
+    * {
+          margin: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          background-color: #F1F5F9;
+        }
+  </style>
+</head>
+
+<body>
+  <header-component>
+    <logo-component slot="brand"></logo-component>
+    <menu-component slot="nav"></menu-component>
+  </header-component>
+
+  <main-component>
+    <table-component slot="table"></table-component>
+    <form-component slot="form"></form-component>
+  </main-component>
+
+  <script type="module" src="src/index.js"></script>
+</body>
+
+</html>
