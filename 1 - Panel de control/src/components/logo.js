@@ -22,6 +22,7 @@ class LogoComponent extends HTMLElement {
           display: grid;
           gap: 2.5rem;
           grid-auto-flow: column;
+          padding-right: 0;
         }
 
         .logo-icon {
@@ -35,7 +36,8 @@ class LogoComponent extends HTMLElement {
         .logo p {
           color: hsl(0, 0%, 100%);
           font-weight: bold;
-          font-size: 1.5rem;
+          font-size: clamp(17px, 2vw, 24px);
+      
         }
       </style>
 

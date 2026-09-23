@@ -4,6 +4,7 @@ class Table extends HTMLElement {
         super()
 
         this.shadow = this.attachShadow({ mode: 'open' })
+        
     }
 
     connectedCallback() {
@@ -48,7 +49,7 @@ this.shadow.innerHTML =
         }
 
         .table-filter svg {
-            fill: hsl(272, 40%, 35%);
+            fill: hsla(0, 0%, 100%, 1.00);
             height: 1.5rem;
             width: 1.5rem;
         }
@@ -141,7 +142,6 @@ this.shadow.innerHTML =
                 <span>Fecha de actualización:</span>
                 <span>2026-09-22</span>
             </div>
-
         </div>
 
     </section>

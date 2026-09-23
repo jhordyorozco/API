@@ -25,11 +25,17 @@ class Main extends HTMLElement {
 
     .main {
       display: grid;
-      grid-template-columns: minmax(20rem, 24rem) 1fr;
+      grid-template-columns: 1fr 3fr;
       gap: 1rem;
       padding: 1rem;
     }
 
+    @media (max-width: 768px) {
+      .main {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+    }
     
     </style>
 

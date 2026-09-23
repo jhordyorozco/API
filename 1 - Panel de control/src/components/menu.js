@@ -1,7 +1,7 @@
 class MenuComponent extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
@@ -10,7 +10,7 @@ class MenuComponent extends HTMLElement {
   }
 
   render() {
-    this.shadowRoot.innerHTML = 
+    this.shadowRoot.innerHTML =
     /* html */ `
       <style>
         * {
@@ -53,13 +53,60 @@ class MenuComponent extends HTMLElement {
           text-decoration: none;
           font-size: 1.5rem;
         }
+
+        .menu-toggle {
+            position: absolute;
+            right: 17px;
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: pointer;
+            align-items: end;
+            margin-right: 2rem;
+          }
+          
+          .menu-toggle span {
+            display: block;
+            width: 40px;
+            height: 4px;
+            background-color: hsla(0, 0%, 100%, 1.00);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+          }
+
+          .menu-toggle span:nth-child(1) {
+            transform: rotate(0deg) translate(0);
+          }
+
+          .menu-toggle span:nth-child(2) {
+            opacity: 1;
+          }
+
+          .menu-toggle span:nth-child(3) {
+            transform: rotate(0deg) translate(0);
+          }
+
+          .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 9px);
+          }
+
+          .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+          }
+
+          .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -10px);
+          }
       </style>
 
+        <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <nav class="menu">
-        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>menu</title>
-          <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-        </svg>
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Productos</a></li>
@@ -72,14 +119,19 @@ class MenuComponent extends HTMLElement {
 
   addListeners() {
     const menu = this.shadowRoot.querySelector('.menu');
-    const icon = this.shadowRoot.querySelector('.menu-icon');
+    const toggle = this.shadowRoot.querySelector('.menu-toggle');
 
-    icon.addEventListener('click', () => {
+    toggle.addEventListener('click', () => {
       menu.classList.toggle('menu-open');
+      if (menu.classList.contains('menu-open')) {
+        toggle.classList.add('active');
+        } else {
+        toggle.classList.remove('active');
+        }
     });
   }
 }
 
 customElements.define('menu-component', MenuComponent);
 
-export {MenuComponent};
+export { MenuComponent };

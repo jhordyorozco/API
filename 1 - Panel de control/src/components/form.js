@@ -29,7 +29,6 @@ class Form extends HTMLElement {
             display: grid;
             gap: 1rem;
             grid-template-columns: minmax(0, 1fr) auto;
-            padding: 0.6rem 0.6rem 0 0.6rem;
         }
 
         .form-title {
@@ -70,22 +69,22 @@ class Form extends HTMLElement {
         .form {
             display: grid;
             background-color: hsl(0, 0%, 100%);
+            height: 80%;
             padding: 1.5rem;
+            border-top:2px solid hsl(35, 90%, 55%);
         }
 
         .form-inputs {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(min(100%,360px), 1fr));
             gap: 1.5rem;
         }
 
         .name-inputs, .email-inputs {
-            background-color: hsl(0, 0%, 100%);
             border: 1px solid hsl(0, 0%, 75%);
             height: 2rem;
             padding: 0.5rem;
             width: 100%;
-
         }
 
         label {

@@ -23,9 +23,16 @@ class HeaderComponent extends HTMLElement {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
           justify-content: space-between;
-          padding: 0.5rem 2rem;
+          padding: 0.5rem 0rem 0.5rem 1.5rem;
           border-bottom: 0.3rem solid hsla(0, 0%, 100%, 1.00);
         }
+
+        @media (max-width: 768px) {
+      .header {
+        padding: 0.5rem 0rem 0.5rem 0.5rem;
+      }
+    }
+
       </style>
 
       <div class="header">
