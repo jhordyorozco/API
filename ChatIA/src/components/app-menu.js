@@ -5,8 +5,36 @@ export class AppMenu extends HTMLElement {
   }
 
   connectedCallback() {
+    this.loadData();
     this.render();
     this.bindToggle();
+  }
+
+  loadData() {
+    this.data = {
+      user: {
+        initials: 'JO',
+        name: 'Jhordy Orozco',
+        plan: 'Admin',
+      },
+      pinned: [
+        { name: 'Pagar menos impuesto Hacienda', url: '#' },
+        { name: 'Tutorial para ser millonario', url: '#' },
+      ],
+      recent: [
+        { name: 'Como ganar la lotería', url: '#' },
+        { name: 'Colores Vintage', url: '#' },
+        { name: 'Como farmear Aura', url: '#' },
+        { name: 'Regulación masiva', url: '#' },
+        { name: 'Trucos GTA', url: '#' },
+        { name: 'Hackear Wifi', url: '#' },
+        { name: 'Oliva o aceituna?', url: '#' },
+        { name: 'Calcular impuesto', url: '#' },
+        { name: 'Edita foto con musculos', url: '#' },
+        { name: 'Preparar Shandy', url: '#' },
+        { name: 'Tasa dolar a bs', url: '#' },
+      ],
+    };
   }
 
   render() {
@@ -20,11 +48,43 @@ export class AppMenu extends HTMLElement {
 
         :host {
           display: block;
+          height: 100%;
+          max-width: 18rem;
           transition: width 0.3s;
-          width: 18rem;
+          width: 100%;
+        }
+
+        @media (max-width: 36rem) {
+          :host {
+            height: 100dvh;
+            left: 0;
+            max-width: 18rem;
+            position: fixed;
+            top: 0;
+            transform: translateX(-100%);
+            transition: transform 0.25s ease;
+            width: min(18rem, 85vw);
+            z-index: 10;
+          }
+
+          :host([open]) { transform: translateX(0); }
+          :host([collapsed]) { max-width: 18rem; width: min(18rem, 85vw); }
+          .side-menu { box-shadow: 0 0 1.5rem rgb(0 0 0 / 18%); }
+          .side-menu__backdrop { display: none; }
+          :host([open]) .side-menu__backdrop {
+            background: rgb(0 0 0 / 35%);
+            border: 0;
+            display: block;
+            height: 100dvh;
+            left: 100%;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+          }
         }
 
         :host([collapsed]) {
+          max-width: 4.2rem;
           width: 4.2rem;
         }
 
@@ -37,16 +97,32 @@ export class AppMenu extends HTMLElement {
           grid-template-columns: 1fr;
         }
 
+        :host([collapsed]) .side-menu__link,
+        :host([collapsed]) .new-chat,
+        :host([collapsed]) .brand {
+          gap: 0;
+          justify-content: center;
+          padding-inline: 0;
+        }
+
+        :host([collapsed]) .side-menu__section--scroll {
+          overflow: hidden;
+        }
+
         .side-menu {
           background: hsl(39, 33%, 77%);
           border-right: 1px solid hsl(39, 20%, 57%);
           display: grid;
           gap: 1rem;
           grid-template-rows: auto auto auto 1fr auto;
-          height: 100vh;
+          height: 100%;
           overflow: hidden;
           padding: clamp(0.6rem, 2vw, 1rem);
           width: 100%;
+        }
+
+        .side-menu__backdrop {
+          display: none;
         }
 
         .side-menu__top {
@@ -61,8 +137,9 @@ export class AppMenu extends HTMLElement {
         }
 
         .side-menu__section--scroll {
+          max-height: 19rem;
           min-height: 0;
-          overflow-y: scroll;
+          overflow-y: auto;
           scrollbar-color: hsl(39, 25%, 66%) hsl(39, 21%, 58%);
           scrollbar-width: thin;
         }
@@ -235,6 +312,7 @@ export class AppMenu extends HTMLElement {
       </style>
 
       <aside class="side-menu">
+        <button class="side-menu__backdrop" type="button" aria-label="Cerrar menú"></button>
         <div class="side-menu__top">
           <button class="brand" type="button" aria-label="Colapsar menú">
             <svg class="brand__icon" viewBox="0 0 24 24">
@@ -257,136 +335,62 @@ export class AppMenu extends HTMLElement {
         </a>
 
         <nav class="side-menu__section">
-          <ul class="side-menu__list">
+          <ul class="side-menu__list side-menu__list--pinned">
             <li class="side-menu__title side-menu__label">Fijado</li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z"></path>
-                </svg>
-                <span class="side-menu__label">Pagar menos impuesto Hacienda</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z"></path>
-                </svg>
-                <span class="side-menu__label">Tutorial para ser millonario</span>
-              </a>
-            </li>
           </ul>
         </nav>
 
         <nav class="side-menu__section side-menu__section--scroll">
-          <ul class="side-menu__list">
+          <ul class="side-menu__list side-menu__list--recent">
             <li class="side-menu__title side-menu__label">Recientes</li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Como ganar la lotería</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Colores Vintage</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Como farmear Aura</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Regulación masiva</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Trucos GTA</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Hackear Wifi</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Oliva o aceituna?</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Calcular impuesto</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Edita foto con musculos</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Preparar Shandy</span>
-              </a>
-            </li>
-            <li>
-              <a class="side-menu__link" href="#">
-                <svg class="side-menu__icon" viewBox="0 0 24 24">
-                  <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"></path>
-                </svg>
-                <span class="side-menu__label">Tasa dolar a bs</span>
-              </a>
-            </li>
           </ul>
         </nav>
 
         <div class="side-menu__user side-menu__label">
-          <div class="avatar">JO</div>
+          <div class="avatar">${this.data.user.initials}</div>
           <div class="side-menu__user-info">
-            <span class="side-menu__user-name">Jhordy Orozco</span>
-            <span class="side-menu__user-plan">Admin</span>
+            <span class="side-menu__user-name">${this.data.user.name}</span>
+            <span class="side-menu__user-plan">${this.data.user.plan}</span>
           </div>
         </div>
       </aside>
     `;
+
+    this.renderList('.side-menu__list--pinned', this.data.pinned, 'M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z');
+    this.renderList('.side-menu__list--recent', this.data.recent, 'M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z');
+  }
+
+  renderList(selector, items, iconPath) {
+    const list = this.shadow.querySelector(selector);
+
+    items.forEach(item => {
+      const entry = document.createElement('li');
+
+      entry.innerHTML =
+      /* html */ `
+        <a class="side-menu__link" href="${item.url}">
+          <svg class="side-menu__icon" viewBox="0 0 24 24">
+            <path d="${iconPath}"></path>
+          </svg>
+          <span class="side-menu__label">${item.name}</span>
+        </a>
+      `;
+
+      list.appendChild(entry);
+    });
   }
 
   bindToggle() {
     const toggleButton = this.shadow.querySelector('.brand');
     toggleButton.addEventListener('click', () => {
       this.toggleAttribute('collapsed');
+    });
+    document.addEventListener('chat-menu-toggle', event => {
+      this.toggleAttribute('open', event.detail.open);
+    });
+    this.shadow.querySelector('.side-menu__backdrop').addEventListener('click', () => {
+      this.removeAttribute('open');
+      document.dispatchEvent(new CustomEvent('chat-menu-toggle', { detail: { open: false } }));
     });
   }
 }

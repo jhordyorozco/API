@@ -19,7 +19,7 @@ export class BoxPrompt extends HTMLElement {
 
         :host {
           display: block;
-          height: 100vh;
+          height: 100%;
         }
 
         h1 {
@@ -27,6 +27,58 @@ export class BoxPrompt extends HTMLElement {
           font-size: clamp(1.8rem, 40px, 2.8rem);
           justify-self: center;
           text-align: center;
+        }
+
+        .prompt__header {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          min-width: 0;
+          position: relative;
+        }
+
+        .menu-btn {
+          align-items: center;
+          background: transparent;
+          border: 1px solid hsl(39, 20%, 57%);
+          border-radius: 0.5rem;
+          color: inherit;
+          cursor: pointer;
+          display: none;
+          height: 2.5rem;
+          justify-content: center;
+          left: 0;
+          position: absolute;
+          width: 2.5rem;
+        }
+
+        .menu-btn svg {
+          fill: none;
+          height: 1.25rem;
+          stroke: currentColor;
+          stroke-width: 1.8;
+          width: 1.25rem;
+        }
+
+        @media (max-width: 36rem) {
+          .prompt__header {
+            display: flex;
+            position: static;
+          }
+          .menu-btn {
+            display: grid;
+            left: 1rem;
+            position: absolute;
+            top: 1rem;
+          }
+          h1 {
+            font-size: clamp(1.5rem, 7vw, 2.25rem);
+            line-height: 1.12;
+            overflow-wrap: anywhere;
+          }
+          .prompt { padding: 1rem; position: relative; }
+          .prompt__box { gap: 0.25rem; padding: 0.45rem; }
+          .prompt__input { font-size: 0.95rem; }
         }
 
         .prompt {
@@ -114,7 +166,12 @@ export class BoxPrompt extends HTMLElement {
       </style>
 
       <div class="prompt">
-        <h1><slot name="title">Bienvenido mi hermano</slot></h1>
+        <div class="prompt__header">
+          <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <h1><slot name="title">Bienvenido mi hermano</slot></h1>
+        </div>
         <div class="prompt__box">
           <button class="icon-btn" type="button" aria-label="Adjuntar">
             <svg class="icon-btn__icon" viewBox="0 0 24 24">
@@ -130,6 +187,14 @@ export class BoxPrompt extends HTMLElement {
         </div>
       </div>
     `;
+
+    this.shadow.querySelector('.menu-btn').addEventListener('click', () => {
+      const button = this.shadow.querySelector('.menu-btn');
+      const opening = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(opening));
+      button.setAttribute('aria-label', opening ? 'Cerrar menú' : 'Abrir menú');
+      document.dispatchEvent(new CustomEvent('chat-menu-toggle', { detail: { open: opening } }));
+    });
   }
 }
 

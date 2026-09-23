@@ -11,11 +11,27 @@
       margin: 0;
     }
 
+    html,
+    body {
+      height: 100%;
+      min-height: 100%;
+    }
+
     body {
       background: hsl(41, 38%, 85%);
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 18rem minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      height: 100vh;
+      height: 100dvh;
       min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    @media (max-width: 36rem) {
+      body {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
   </style>
 </head>

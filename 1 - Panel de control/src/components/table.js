@@ -4,11 +4,33 @@ class Table extends HTMLElement {
         super()
 
         this.shadow = this.attachShadow({ mode: 'open' })
-        
+        this.data = []
     }
 
     connectedCallback() {
+        this.loadData()
         this.render()
+    }
+
+    loadData() {
+        this.data = [
+            {
+                name: 'Nombre:',
+                value: 'Jhordy Orozco',
+            },
+            {
+                name: 'Email:',
+                value: 'danian1307@gmail.com',
+            },
+            {
+                name: 'Fecha de creación:',
+                value: '2026-09-22',
+            },
+            {
+                name: 'Fecha de actualización:',
+                value: '2026-09-22',
+            },
+        ]
     }
 
 render() {
@@ -121,31 +143,26 @@ this.shadow.innerHTML =
             </div>
         </header>
 
-        <div class="table-grid">
-
-            <div class="table-cell">
-                <span>Nombre:</span>
-                <span>Jhordy Orozco</span>
-            </div>
-
-            <div class="table-cell">
-                <span>Email:</span>
-                <span>danian1307@gmail.com</span>
-            </div>
-
-            <div class="table-cell">
-                <span>Fecha de creación:</span>
-                <span>2026-09-22</span>
-            </div>
-
-            <div class="table-cell">
-                <span>Fecha de actualización:</span>
-                <span>2026-09-22</span>
-            </div>
-        </div>
+        <div class="table-grid"></div>
 
     </section>
         `
+
+        const tablegrid = this.shadow.querySelector('.table-grid')
+
+        this.data.forEach(field => {
+            const tablecell = document.createElement('div')
+            tablecell.classList.add('table-cell')
+
+            const label = document.createElement('span')
+            label.textContent = field.name
+
+            const value = document.createElement('span')
+            value.textContent = field.value
+
+            tablecell.append(label, value)
+            tablegrid.appendChild(tablecell)
+        })
     }
 }
 
