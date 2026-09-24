@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sendo Beta la IA der pueblo</title>
-  <style>
-    * {
+* {
       box-sizing: border-box;
       margin: 0;
     }
@@ -33,14 +25,3 @@
         grid-template-columns: minmax(0, 1fr);
       }
     }
-  </style>
-</head>
-
-<body>
-  <app-menu></app-menu>
-  <box-prompt></box-prompt>
-
-  <script type="module" src="src/index.js"></script>
-</body>
-
-</html>

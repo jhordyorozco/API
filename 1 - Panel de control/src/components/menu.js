@@ -20,118 +20,112 @@ class MenuComponent extends HTMLElement {
 
         .menu {
           align-items: center;
-          display: grid;
-          position: relative;
-          justify-content: end;
-          padding: 0.5rem;
-        }
-
-        .menu-icon {
-          cursor: pointer;
-          fill: hsl(0, 0%, 100%);
-          width: 2.5rem;
-        }
-
-        .menu ul {
-          background-color: hsla(24, 77%, 61%, 1.00);
-          display: none;
-          gap: 1rem;
-          list-style: none;
-          padding: 1.5rem;
-          position: absolute;
-          right: 0;
-          top: 2.5rem;
-          min-width: 10rem;
-        }
-
-        .menu-open ul {
-          display: grid;
-        }
-
-        .menu a {
-          color: hsl(0, 0%, 100%);
-          text-decoration: none;
-          font-size: 1.5rem;
+          display: flex;
+          justify-content: flex-end;
         }
 
         .menu-toggle {
-            position: absolute;
-            right: 17px;
-            z-index: 300;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            cursor: pointer;
-            align-items: end;
-            margin-right: 2rem;
-          }
-          
-          .menu-toggle span {
-            display: block;
-            width: 40px;
-            height: 4px;
-            background-color: hsla(0, 0%, 100%, 1.00);
-            transition: all 0.3s ease;
-            border-radius: 2px;
-          }
+          align-items: end;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          position: relative;
+          z-index: 2;
+        }
 
-          .menu-toggle span:nth-child(1) {
-            transform: rotate(0deg) translate(0);
-          }
+        .menu-toggle span {
+          background-color: hsl(0, 0%, 100%);
+          border-radius: 2px;
+          display: block;
+          height: 4px;
+          transition: all 0.3s ease;
+          width: 40px;
+        }
 
-          .menu-toggle span:nth-child(2) {
-            opacity: 1;
-          }
+        .menu-toggle span:nth-child(1) {
+          transform: rotate(0deg) translate(0);
+        }
 
-          .menu-toggle span:nth-child(3) {
-            transform: rotate(0deg) translate(0);
-          }
+        .menu-toggle span:nth-child(2) {
+          opacity: 1;
+        }
 
-          .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 9px);
-          }
+        .menu-toggle span:nth-child(3) {
+          transform: rotate(0deg) translate(0);
+        }
 
-          .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-          }
+        .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(7px, 9px);
+        }
 
-          .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -10px);
-          }
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -10px);
+        }
+
+        nav {
+          background-color: hsl(24, 77%, 61%);
+          padding: 5rem 1.5rem;
+          position: fixed;
+          right: 0;
+          top: 0;
+          transform: translateY(-100%);
+          transition: transform 0.3s ease;
+          width: 200px;
+          z-index: -1;
+        }
+
+        nav.menu-open {
+          transform: translateY(0);
+        }
+
+        nav ul {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          list-style: none;
+        }
+
+        nav a {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.5rem;
+          text-decoration: none;
+        }
       </style>
 
-        <div class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <section class="menu">
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-      <nav class="menu">
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Productos</a></li>
-          <li><a href="#">Pedidos</a></li>
-          <li><a href="#">Ajustes</a></li>
-        </ul>
-      </nav>
+        <nav>
+          <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Pedidos</a></li>
+            <li><a href="#">Ajustes</a></li>
+          </ul>
+        </nav>
+      </section>
     `;
   }
 
   addListeners() {
-    const menu = this.shadowRoot.querySelector('.menu');
+    const menu = this.shadowRoot.querySelector('nav');
     const toggle = this.shadowRoot.querySelector('.menu-toggle');
 
     toggle.addEventListener('click', () => {
       menu.classList.toggle('menu-open');
-      if (menu.classList.contains('menu-open')) {
-        toggle.classList.add('active');
-        } else {
-        toggle.classList.remove('active');
-        }
+      toggle.classList.toggle('active');
     });
   }
 }
 
 customElements.define('menu-component', MenuComponent);
 
-export { MenuComponent };

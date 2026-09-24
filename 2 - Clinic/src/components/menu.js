@@ -17,29 +17,26 @@ class Menu extends HTMLElement {
         margin: 0;
       }
 
-      .menu {
+      div {
         align-items: center;
         display: grid;
         gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
-        justify-content: space-between;
+        grid-template-columns: 1fr auto auto;
       }
 
-      .menu__list {
+      nav {
         display: grid;
         gap: 2rem;
         grid-auto-flow: column;
-        list-style: none;
       }
 
-      .menu__link {
-        color: hsl(210, 60%, 20%);
-        font-size: 0.95rem;
-        font-weight: 500;
-        text-decoration: none;
+      span {
+        background-color: hsl(210, 15%, 85%);
+        height: 2rem;
+        width: 0.0625rem;
       }
 
-      .menu__button {
+      button {
         background-color: hsl(210, 70%, 15%);
         border: none;
         border-radius: 0.5rem;
@@ -51,15 +48,12 @@ class Menu extends HTMLElement {
       }
     </style>
 
-    <div class="menu">
+    <div>
       <nav>
-        <ul class="menu__list">
-          <li><a class="menu__link" href="#especialidades">Especialidades</a></li>
-          <li><a class="menu__link" href="#sobre-nosotros">Sobre Nosotros</a></li>
-          <li><a class="menu__link" href="#contacto">Contacto</a></li>
-        </ul>
+        <slot></slot>
       </nav>
-      <button class="menu__button">Solicitar Consulta</button>
+      <span></span>
+      <button>Solicitar Consulta</button>
     </div>
     `;
   }

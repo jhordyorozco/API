@@ -1,52 +1,45 @@
 class Header extends HTMLElement {
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({mode: 'open'});
+
+  constructor () {
+    super()
+    this.shadow = this.attachShadow({ mode: 'open' })
   }
 
-  connectedCallback() {
-    this.render();
+  connectedCallback () {
+    this.render()
   }
-
-  render() {
+  
+  render () {
     this.shadow.innerHTML =
-      /*html*/ `
+    /*html*/`
     <style>
       * {
         box-sizing: border-box;
         margin: 0;
       }
 
-      .header {
+      header {
         align-items: center;
         background-color: hsl(0, 0%, 100%);
         border-radius: 1rem;
+        box-shadow: 0 0.5rem 1.5rem hsla(212, 60%, 10%, 0.25);
         display: grid;
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
-        justify-content: space-between;
-        margin: 1.5rem auto;
-        max-width: 90%;
-        padding: 1rem 2rem;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+        padding: 1rem 1.5rem;
+        width: 100%;
       }
-
-      .header__logo ::slotted(img) {
-        border-radius: 50%;
-        height: 2.5rem;
-        width: 2.5rem;
-      }
+    
     </style>
 
-    <div class="header">
-      <div class="header__logo">
-        <slot name="logo"></slot>
-      </div>
-      <slot name="menu"></slot>
-    </div>
-    `;
+    <header>
+      <slot></slot>
+    </header>
+
+    `
+
   }
+
 }
 
 customElements.define('header-component', Header);
-
-export {Header};

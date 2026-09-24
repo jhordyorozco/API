@@ -1,48 +1,41 @@
 class HeaderComponent extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' })
   }
 
   connectedCallback() {
-    this.render();
+    this.render()
   }
 
   render() {
-    this.shadowRoot.innerHTML = 
+    this.shadowRoot.innerHTML =
     /* html */ `
       <style>
+
         * {
           margin: 0;
           box-sizing: border-box;
         }
 
-        .header {
+        header {
           align-items: center;
-          background-color: rgba(238, 162, 7, 1);
+          background-color: hsl(40, 94%, 48%);
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
+          height: 10vh;
           justify-content: space-between;
-          padding: 0.5rem 0rem 0.5rem 1.5rem;
-          border-bottom: 0.3rem solid hsla(0, 0%, 100%, 1.00);
+          padding: 0 1rem;
+          position: relative;
+          z-index: 10;
         }
-
-        @media (max-width: 768px) {
-      .header {
-        padding: 0.5rem 0rem 0.5rem 0.5rem;
-      }
-    }
-
       </style>
 
-      <div class="header">
-        <slot name="brand"></slot>
-        <slot name="nav"></slot>
-      </div>
+      <header>
+        <slot></slot>
+      </header>
     `;
   }
 }
 
-customElements.define('header-component', HeaderComponent);
-
-export {HeaderComponent};
+customElements.define('header-component', HeaderComponent)

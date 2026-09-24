@@ -1,15 +1,15 @@
 class Main extends HTMLElement {
 
-  constructor () {
+  constructor() {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
   }
 
-  connectedCallback () {
+  connectedCallback() {
     this.render()
   }
-  
-  render () {
+
+  render() {
     this.shadow.innerHTML =
     /*html*/`
     <style>
@@ -18,31 +18,28 @@ class Main extends HTMLElement {
           box-sizing: border-box;
         }
 
-        :host {
-          display: block;
-          width: 100%;
+        main {
+          background-color: hsl(210, 40%, 96%);
+          display: grid;
+          grid-template-columns: 1fr 3fr;
+          gap: 1rem;
+          min-height: 90vh;
+          max-height: 90vh;
+          padding: 1rem;
         }
 
-    .main {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 1rem;
-      padding: 1rem;
-    }
+        @media (max-width: 768px) {
+          main {
+            grid-template-columns: 1fr;
+            padding: 1rem;
+          }
+        }
+        
+      </style>
 
-    @media (max-width: 768px) {
-      .main {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
-    }
-    
-    </style>
-
-     <div class="main">
-        <slot name="table"></slot>
-        <slot name="form"></slot>
-      </div>
+      <main>
+        <slot></slot>
+      </main>
 
     `
   }
