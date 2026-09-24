@@ -6,20 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de control</title>
   <link rel="stylesheet" href="style.css">
+  <script type="module" src="src/index.js"></script>
 </head>
 
 <body>
   <header-component>
-    <logo-component slot="brand"></logo-component>
-    <menu-component slot="nav"></menu-component>
+    <logo-component></logo-component>
+    <menu-component></menu-component>
   </header-component>
 
   <main-component>
-    <table-component slot="table"></table-component>
-    <form-component slot="form"></form-component>
+    <table-component label='{"name": "Nombre",
+     "email": "Email",
+      "createdAt": "Fecha de creación",
+       "updatedAt": "Fecha de actualización"}'>
+    </table-component>
+    <form-component></form-component>
   </main-component>
 
-  <script type="module" src="src/index.js"></script>
+
+
 </body>
 
 </html>
