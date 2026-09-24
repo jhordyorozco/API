@@ -1,2 +1,2 @@
 import './components/header.js'
-import './components/menu.js'
+import './components/main.js'

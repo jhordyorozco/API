@@ -1,40 +1,60 @@
 class Header extends HTMLElement {
 
-  constructor () {
+  constructor() {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
   }
 
-  connectedCallback () {
+  connectedCallback() {
     this.render()
   }
-  
-  render () {
-    this.shadow.innerHTML =
-    /*html*/`
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-      }
 
-      header {
-        align-items: center;
-        background-color: hsl(0, 0%, 100%);
-        border-radius: 1rem;
-        box-shadow: 0 0.5rem 1.5rem hsla(212, 60%, 10%, 0.25);
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-        padding: 1rem 1.5rem;
-        width: 100%;
-      }
+  render() {
+  this.shadow.innerHTML =
+  /*html*/`
+  <style>
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+      max-width: 1120px;
+      margin: 1rem auto;
+      padding: 0.75rem 1rem;
+      background: white;
+      color: #06395b;
+}
+
+.logo {
+  justify-self: start;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.boton {
+  justify-self: end;
+  padding: 1rem;
+  border-radius: 0.2rem;
+  background: #06395b;
+  color: white;
+}
     
     </style>
 
-    <header>
-      <slot></slot>
-    </header>
+  <header>
+    <a class="logo" href="#">Clínica Digital</a>
+
+    <nav aria-label="Navegación principal">
+      <a href="#">Especialidades</a>
+      <a href="#">Sobre nosotros</a>
+      <a href="#">Contacto</a>
+    </nav>
+
+      <a class="boton" href="#">Solicitar consulta</a>
+</header>
 
     `
 
