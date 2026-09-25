@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinic</title>
     <script type="module" src="src/index.js"></script>
+    <style>
+      * {
+          margin: 0;
+          box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
-    <header-component></header-component>
+   <header-component>
+    <logo-component></logo-component>
+    <menu-component></menu-component>
+   </header-component>
+   
     <main>
       <hero-component></hero-component>
     </main>

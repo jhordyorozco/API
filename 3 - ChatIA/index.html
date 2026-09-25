@@ -5,24 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sendo Beta la IA der pueblo</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-  </style>
+  <script type="module" src="src/index.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <app-menu></app-menu>
-  <box-prompt></box-prompt>
+  <header-component>
+    <menu-component>
+      <brand-component></brand-component>
+      <chats-component></chats-component>
+      <user-area-component></user-area-component>
+    </menu-component>
+  </header-component>
 
-  <script type="module" src="src/index.js"></script>
+  <main-component>
+    <box-component></box-component>
+  </main-component>
 </body>
 
 </html>
