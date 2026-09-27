@@ -44,130 +44,147 @@ class Chats extends HTMLElement {
     this.shadow.innerHTML =
     /* html */ `
       <style>
-        * {
-          box-sizing: border-box;
-          margin: 0;
-        }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
 
-        .chats{
-          display: flex;
-          flex-direction: column;
-          height: 85vh;
-          max-height: 85vh;
-          overflow: hidden;
-        }
-        .new-chat {
-          align-items: center;
-          background: hsl(39, 30%, 70%);
-          border: 1px solid hsl(39, 21%, 58%);
-          border-radius: 0.4rem;
-          color: inherit;
-          display: flex;
-          gap: 0.6rem;
-          justify-content: flex-start;
-          overflow: hidden;
-          padding: 0.7rem;
-          text-decoration: none;
-          white-space: nowrap;
-        }
+  .chats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: 100%;
+    overflow: hidden;
+  }
 
-        .new-chat:hover {
-          background: hsl(39, 25%, 66%);
-        }
+  .new-chat {
+    align-items: center;
+    background: hsl(39, 30%, 70%);
+    border: 1px solid hsl(39, 21%, 58%);
+    border-radius: 0.4rem;
+    color: inherit;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0.7rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
 
-        .new-chat-icon {
-          fill: none;
-          flex-shrink: 0;
-          height: 1.2rem;
-          stroke: currentColor;
-          stroke-width: 2;
-          width: 1.2rem;
-        }
+  .new-chat:hover {
+    background: hsl(39, 25%, 66%);
+  }
 
-        .label {
-          display: none;
-        }
+  .new-chat-icon {
+    fill: none;
+    flex-shrink: 0;
+    height: 1.2rem;
+    stroke: currentColor;
+    stroke-width: 2;
+    width: 1.2rem;
+  }
 
-        .chats.active .label {
-          display: block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          transition: max-width 0.2s, opacity 0.2s;
-          white-space: nowrap;
-        }
+  .label {
+    display: none;
+  }
 
-        .chats.active .chats-link:hover .label {
-          animation: chat-scroll 5s linear infinite;
-        }
+  .chats.active .label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: max-width 0.2s, opacity 0.2s;
+    white-space: nowrap;
+  }
 
-        @keyframes chat-scroll {
-        0% {
-          transform: translateX(0);
-        }
+  .chats-section {
+    flex-shrink: 0;
+    overflow: hidden;
+  }
 
-        40% {
-          transform: translateX(0);
-        }
+  .chats-section-recent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
 
-        100% {
-          transform: translateX(-50%);
-        }
-      }
+  .chats-title {
+    color: hsl(34, 17%, 39%);
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.3rem;
+  }
 
-        .chats-scroll {
-          border-block: 1px solid hsl(39, 21%, 58%);
-          flex: 1;
-          min-height: 0;
-          overflow-x: hidden;
-          overflow-y: auto;
-          padding-block: 0.5rem;
-          scrollbar-width: none;
-        }
+  .chats-scroll {
+    border-block: 1px solid hsl(39, 21%, 58%);
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-block: 0.5rem;
+    scrollbar-width: none;
+  }
 
-        .chats-section {
-          flex-shrink: 0;
-          overflow: hidden;
-        }
+  .chats-scroll-pinned {
+    max-height: 7.6rem;
+  }
 
-        .chats-title {
-          color: hsl(34, 17%, 39%);
-          font-size: 0.8rem;
-          font-weight: bold;
-          padding: 0.3rem;
-        }
+  .chats-list {
+    display: grid;
+    gap: 0.3rem;
+    list-style: none;
+    padding: 0;
+  }
 
-        .chats-link {
-          align-items: center;
-          border-radius: 0.4rem;
-          color: inherit;
-          display: flex;
-          gap: 0;
-          height: 2.4rem;
-          overflow: hidden;
-          padding-inline: 0.6rem;
-          text-decoration: none;
-          white-space: nowrap;
-        }
+  .chats-link {
+    align-items: center;
+    border-radius: 0.4rem;
+    color: inherit;
+    display: flex;
+    gap: 0;
+    height: 2.4rem;
+    overflow: hidden;
+    padding-inline: 0.6rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
 
-        .chats-link:hover {
-          background: hsl(40, 29%, 71%);
-        }
+  .chats-link:hover {
+    background: hsl(40, 29%, 71%);
+  }
 
-        .chats-link-icon {
-          fill: none;
-          height: 1rem;
-          stroke: currentColor;
-          stroke-width: 1.5;
-          width: 1rem;
-        }
+  .chats-link-icon {
+    fill: none;
+    height: 1rem;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    width: 1rem;
+  }
 
-        .chats-list {
-          display: grid;
-          gap: 0.3rem;
-          list-style: none;
-          padding: 0;
-        }
-      </style>
+  .label-text {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .chats.active .chats-link:hover .label-text {
+    animation: chat-scroll 5s linear infinite;
+  }
+
+  @keyframes chat-scroll {
+    0% {
+      transform: translateX(0);
+    }
+
+    40% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
 
       <div class="chats">
         <a class="new-chat" href="#">
@@ -178,10 +195,12 @@ class Chats extends HTMLElement {
         </a>
         <nav class="chats-section">
           <div class="chats-title label">Fijado</div>
-          <ul class="chats-list pinned"></ul>
+          <div class="chats-scroll chats-scroll-pinned">
+            <ul class="chats-list pinned"></ul>
+          </div>
         </nav>
 
-        <nav class="chats-section">
+        <nav class="chats-section chats-section-recent">
           <div class="chats-title label">Recientes</div>
           <div class="chats-scroll">
             <ul class="chats-list recent"></ul>
@@ -208,7 +227,10 @@ class Chats extends HTMLElement {
       a.href = '#';
 
       span.classList.add('label');
-      span.textContent = item.label;
+      const track = document.createElement('span');
+      track.classList.add('label-text');
+      track.textContent = item.label;
+      span.appendChild(track);
 
       a.appendChild(span);
       li.appendChild(a);

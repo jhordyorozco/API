@@ -57,6 +57,12 @@ class Menu extends HTMLElement {
           box-shadow: 0 0 1.5rem hsla(0, 0%, 0%, 0.25);
           width: min(18rem, 85vw);
         }
+
+        ::slotted(chats-component) {
+          display: flex;
+          flex: 1;
+          min-height: 0;
+        }
       </style>
 
       <nav>
