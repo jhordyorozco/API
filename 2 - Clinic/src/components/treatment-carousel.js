@@ -85,7 +85,7 @@ class TreatmentCarousel extends HTMLElement {
         .track {
           display: grid;
           gap: 1rem;
-          grid-auto-columns: 15.5rem;
+          grid-auto-columns: 14rem;
           grid-auto-flow: column;
           list-style: none;
           min-width: 0;
@@ -108,7 +108,7 @@ class TreatmentCarousel extends HTMLElement {
 
         .card-image {
           display: block;
-          height: 14.5rem;
+          height: 16rem;
           object-fit: cover;
           width: 100%;
         }
