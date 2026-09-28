@@ -45,11 +45,12 @@ class Partners extends HTMLElement {
       }
 
       h2 {
-        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
       }
 
       .subtitle {
         color: hsl(204, 88%, 19%);
+        font-size: 1.2rem;
       }
 
       ::slotted(logos-carousel-component) {
