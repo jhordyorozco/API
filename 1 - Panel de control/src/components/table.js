@@ -158,7 +158,7 @@ class Table extends HTMLElement {
        </section>
         `
 
-     const tableGrid = this.shadow.querySelector('.table-grid')
+    const tableGrid = this.shadow.querySelector('.table-grid')
     const data = this.data;
     data.forEach(field => {
       const tableCell = document.createElement('div')
