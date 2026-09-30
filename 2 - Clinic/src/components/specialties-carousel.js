@@ -85,103 +85,103 @@ class SpecialtiesCarousel extends HTMLElement {
     this.shadow.innerHTML =
     /* html */ `
       <style>
-        * {
-          box-sizing: border-box;
-          font-family: 'Poppins', sans-serif;
-          margin: 0;
-        }
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+    }
 
-        .carousel {
-          align-items: center;
-          display: grid;
-          gap: 0.5rem;
-          grid-template-columns: auto 1fr auto;
-        }
+    .carousel {
+      align-items: center;
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: auto 1fr auto;
+    }
 
-        .arrow {
-          align-items: center;
-          background: transparent;
-          border: none;
-          color: hsl(204, 88%, 19%);
-          cursor: pointer;
-          display: grid;
-          height: 2.5rem;
-          justify-items: center;
-          width: 2rem;
-        }
+    .arrow {
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: hsl(204, 88%, 19%);
+      cursor: pointer;
+      display: grid;
+      height: 2.5rem;
+      justify-items: center;
+      width: 2rem;
+    }
 
-        .arrow-icon {
-          fill: none;
-          height: 1.5rem;
-          stroke: currentColor;
-          stroke-width: 2;
-          width: 1.5rem;
-        }
+    .arrow-icon {
+      fill: none;
+      height: 1.5rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      width: 1.5rem;
+    }
 
-        .track {
-          display: grid;
-          gap: 1rem;
-          grid-auto-columns: 14rem;
-          grid-auto-flow: column;
-          list-style: none;
-          min-width: 0;
-          overflow-x: auto;
-          padding: 0.5rem 0;
-          scroll-behavior: smooth;
-          scroll-snap-type: x mandatory;
-          scrollbar-width: pointer;
-        }
+    .track {
+      display: grid;
+      gap: 1rem;
+      grid-auto-columns: 14rem;
+      grid-auto-flow: column;
+      list-style: none;
+      min-width: 0;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: pointer;
+    }
 
-        .card {
-          align-content: start;
-          background: hsl(0, 0%, 100%);
-          border-radius: 0.5rem;
-          box-shadow: 0 0.1rem 0.6rem hsla(0, 0%, 0%, 0.1);
-          display: grid;
-          overflow: hidden;
-          scroll-snap-align: start;
-        }
+    .card {
+      align-content: start;
+      background: hsl(0, 0%, 100%);
+      border-radius: 0.5rem;
+      box-shadow: 0 0.1rem 0.6rem hsla(0, 0%, 0%, 0.1);
+      display: grid;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
 
-        .card-image {
-          display: block;
-          height: 16rem;
-          object-fit: cover;
-          width: 100%;
-        }
+    .card-image {
+      display: block;
+      height: 16rem;
+      object-fit: cover;
+      width: 100%;
+    }
 
-        .card-body {
-          display: grid;
-          gap: 0.75rem;
-          padding: 1rem 0.5rem;
-        }
+    .card-body {
+      display: grid;
+      gap: 0.75rem;
+      padding: 1rem 0.5rem;
+    }
 
-        h3 {
-          color: hsl(210, 9%, 31%);
-          font-size: 1.1rem;
-        }
+    h3 {
+      color: hsl(210, 9%, 31%);
+      font-size: 1.1rem;
+    }
 
-        p {
-          color: hsl(210, 9%, 25%);
-          font-size: 0.9rem;
-          line-height: 1.4;
-        }
-      </style>
+    p {
+      color: hsl(210, 9%, 25%);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    </style>
 
-      <div class="carousel">
-        <button class="arrow" type="button" aria-label="Anterior" data-direction="-1">
-          <svg class="arrow-icon" viewBox="0 0 24 24">
-            <path d="M15 6l-6 6 6 6"></path>
-          </svg>
-        </button>
+    <div class="carousel">
+      <button class="arrow" type="button" aria-label="Anterior" data-direction="-1">
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <path d="M15 6l-6 6 6 6"></path>
+        </svg>
+      </button>
 
-        <ul class="track"></ul>
+      <ul class="track"></ul>
 
-        <button class="arrow" type="button" aria-label="Siguiente" data-direction="1">
-          <svg class="arrow-icon" viewBox="0 0 24 24">
-            <path d="M9 6l6 6-6 6"></path>
-          </svg>
-        </button>
-      </div>
+      <button class="arrow" type="button" aria-label="Siguiente" data-direction="1">
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <path d="M9 6l6 6-6 6"></path>
+        </svg>
+      </button>
+    </div>
     `;
 
     const track = this.shadow.querySelector('.track');

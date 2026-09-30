@@ -22,6 +22,8 @@ import './components/faq-image.js';
 import './components/specialties.js'
 import './components/specialties-carousel.js'
 
+import './components/form.js'
+
 import './components/footer.js'
 import './components/footer-links.js'
 import './components/footer-contact.js'
