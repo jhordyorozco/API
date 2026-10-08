@@ -127,7 +127,7 @@ class Box extends HTMLElement {
         }
       </style>
 
-      <div class="page">
+      <form class="page">
         <div class="greeting">
           <h1></h1>
         </div>
@@ -144,7 +144,7 @@ class Box extends HTMLElement {
             </svg>
           </button>
         </div>
-      </div>
+      </form>
     `;
 
     const greeting = this.shadow.querySelector('h1');
