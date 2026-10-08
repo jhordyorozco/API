@@ -1,7 +1,7 @@
 class Box extends HTMLElement {
   constructor() {
     super();
-    this.shadow = this.attachShadow({mode: 'open'});
+    this.shadow = this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
@@ -137,8 +137,8 @@ class Box extends HTMLElement {
               <path d="M17.5 8.5 9.6 16.4a2.5 2.5 0 0 1-3.5-3.5l8.3-8.3a4 4 0 1 1 5.7 5.7L11.7 18.7a5.5 5.5 0 0 1-7.8-7.8L12.5 2.3"></path>
             </svg>
           </button>
-          <input class="input" type="text">
-          <button class="send-btn" type="button" aria-label="Enviar">
+          <input class="input" type="text" name="prompt">
+          <button class="send-btn" name="submit" type="button" aria-label="Enviar">
             <svg class="send-icon" viewBox="0 0 24 24">
               <path d="M12 19V5M5 12l7-7 7 7"></path>
             </svg>
@@ -153,6 +153,21 @@ class Box extends HTMLElement {
 
     greeting.textContent = data.greeting;
     input.setAttribute('placeholder', data.placeholder);
+
+    const button = this.shadow.querySelector('[name="submit"]');
+
+    button.addEventListener('click', async event => {
+      try {
+        let formData = new FormData(form);
+        let formDataJson = Object.fromEntries(formData.entries());
+        event.preventDefault();
+      } catch (error) {
+        console.log(error)
+
+      }
+    })
+
+
   }
 }
 
