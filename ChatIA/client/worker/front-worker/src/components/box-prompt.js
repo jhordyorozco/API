@@ -154,21 +154,57 @@ class Box extends HTMLElement {
     greeting.textContent = data.greeting;
     input.setAttribute('placeholder', data.placeholder);
 
-    const button = this.shadow.querySelector('[name="submit"]');
 
-    button.addEventListener('click', async event => {
-      try {
-        let formData = new FormData(form);
-        let formDataJson = Object.fromEntries(formData.entries());
-        event.preventDefault();
-      } catch (error) {
-        console.log(error)
+    
+    this.shadow.querySelector('.box').addEventListener('click', async event => {
+  if (event.target.closest('.send-btn')) {
+    event.preventDefault();
 
+    const form = this.shadow.querySelector('form');
+    const formData = new FormData(form);
+    const formDataJson = Object.fromEntries(formData.entries());
+
+    try {
+      const result = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/worker/chats`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formDataJson),
+        }
+      );
+
+      if (result.ok) {
+        const data = await result.json();
+        form.reset();
+        console.log(data.response);
       }
-    })
-
-
+    } catch (error) {
+      console.log(error);
+    }
   }
+});
+
+}
 }
 
 customElements.define('box-component', Box);
+
+
+
+
+
+    // const button = this.shadow.querySelector('[name="submit"]');
+
+    // button.addEventListener('click', async event => {
+    //   try {
+    //     let formData = new FormData(form);
+    //     let formDataJson = Object.fromEntries(formData.entries());
+    //     event.preventDefault();
+    //   } catch (error) {
+    //     console.log(error)
+
+    //   }
+    // })
